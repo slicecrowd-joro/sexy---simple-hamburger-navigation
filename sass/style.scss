@@ -1,0 +1,256 @@
+body,
+html {
+	height: 100%;
+}
+
+@mixin transitionEaseOut($type, $time) {
+-webkit-transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); 
+   -moz-transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); 
+     -o-transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); 
+        transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); /* ease-out */
+
+-webkit-transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); 
+   -moz-transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); 
+     -o-transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); 
+        transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); /* ease-out */
+}
+
+@mixin transitionDelay($delayTime) {
+	-webkit-transition-delay: $delayTime;
+	-o-transition-delay: $delayTime;
+	transition-delay: $delayTime;
+}
+
+@mixin animationEaseOutExpo() {
+-webkit-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
+   -moz-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
+     -o-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
+        animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000); /* easeOutExpo */
+}
+
+@mixin animation($name, $time) {
+	-webkit-animation: $name $time;
+	-moz-animation: $name $time;
+	-o-animation: $name $time;
+	-ms-animation: $name $time;
+	animation: $name $time;
+}
+
+@mixin rotate($degrees) {
+	-webkit-transform: rotate($degrees);
+	-ms-transform: rotate($degrees);
+	-o-transform: rotate($degrees);
+	transform: rotate($degrees);
+}
+
+.d-flex {
+	display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.flex-centerY-centerX {
+	justify-content: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+$mobile: 767px;
+$tablet: 991px;
+
+body {
+	background-color: #f7f7f7;
+}
+
+.page-wrapper {
+	height: 100%;
+	display: table;
+
+	.page-inner {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+
+.el-wrapper {
+	width: 360px;
+	padding: 15px;
+	margin: 15px auto;
+	background-color: #fff;
+
+	@media (max-width: $tablet) {
+    width: 345px;
+  }
+
+  @media (max-width: $mobile) {
+    width: 290px;
+    margin: 30px auto;
+  }
+
+	&:hover {
+		.h-bg {
+			left: 0px;
+		}
+
+		.price {
+			left: 20px;
+		 	-webkit-transform: translateY(-50%);
+			-ms-transform: translateY(-50%);
+			-o-transform: translateY(-50%);
+			transform: translateY(-50%);
+			color: #818181;
+		}
+
+		.add-to-cart {
+			left: 50%;
+		}
+
+		.img {
+			webkit-filter: blur(7px);
+		    -o-filter: blur(7px);
+		    -ms-filter: blur(7px);
+		    filter: blur(7px);
+		    filter:progid:DXImageTransform.Microsoft.Blur(pixelradius='7', shadowopacity='0.0');
+		    opacity: 0.4;
+		}
+		
+		.info-inner {
+			bottom: 155px;
+		}
+
+		.a-size {
+			@include transitionDelay(300ms);
+			bottom: 50px;
+			opacity: 1;
+		}
+	}
+
+	.box-down {
+		width: 100%;
+		height: 60px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.box-up {
+		width: 100%;
+		height: 300px;
+		position: relative;
+		overflow: hidden;
+		text-align: center;
+	}
+
+	.img {
+		padding: 20px 0;
+		@include transitionEaseOut(all, 800ms);
+	}
+}
+
+.h-bg {
+	@include transitionEaseOut(all, 800ms);
+	width: 660px;
+	height: 100%;
+	background-color: #3f96cd;
+	position: absolute;
+	left: -659px;
+
+	.h-bg-inner {
+		width: 50%;
+		height: 100%;
+		background-color: #464646;
+	}
+}
+
+.info-inner {
+	@include transitionEaseOut(all, 400ms);
+	position: absolute;
+	width: 100%;
+	bottom: 25px;
+	.p-name,
+	.p-company {
+		display: block;
+	}
+
+	.p-name {
+		font-family: 'PT Sans', sans-serif;
+		font-size: 18px; 
+		color: #252525;
+	}
+
+	.p-company {
+		font-family: 'Lato', sans-serif;
+		font-size: 12px; 
+		text-transform: uppercase;
+		color: #8c8c8c;
+	}
+}
+
+.a-size {
+	@include transitionEaseOut(all, 300ms);
+	position: absolute;
+	width: 100%;
+	bottom: -20px;
+	font-family: 'PT Sans', sans-serif;
+	color: #828282;
+	opacity: 0;
+	.size {
+		color: #252525;
+	}
+}
+
+.cart {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+
+	.price {
+		@include transitionEaseOut(all, 600ms);
+		@include transitionDelay(100ms);
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	 	-webkit-transform: translate(-50%,-50%);
+		-ms-transform: translate(-50%,-50%);
+		-o-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50%);
+		font-size: 16px;
+		color: #252525;
+	}
+
+	.add-to-cart {
+		@include transitionEaseOut(all, 600ms);
+		@include transitionDelay(100ms);
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 110%;
+	 	-webkit-transform: translate(-50%,-50%);
+		-ms-transform: translate(-50%,-50%);
+		-o-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50%);
+		
+		.txt {
+			font-size: 12px;
+			color: #fff;
+			letter-spacing: 0.045em;
+			text-transform: uppercase;
+			white-space: nowrap;
+		}
+	}
+}

@@ -1,1 +1,1 @@
-# sexy---simple-hamburger-navigation
+# Sexy & Simple hamburger navigation
