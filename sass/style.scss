@@ -1,18 +1,14 @@
-body,
-html {
-	height: 100%;
-}
-
 @mixin transitionEaseOut($type, $time) {
--webkit-transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); 
-   -moz-transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); 
-     -o-transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); 
-        transition: $type $time cubic-bezier(0.000, 0.000, 0.180, 1.000); /* ease-out */
 
--webkit-transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); 
-   -moz-transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); 
-     -o-transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); 
-        transition-timing-function: cubic-bezier(0.000, 0.000, 0.180, 1.000); /* ease-out */
+-webkit-transition: $type $time cubic-bezier(0.000, 0.000, 0.355, 1.000); 
+   -moz-transition: $type $time cubic-bezier(0.000, 0.000, 0.355, 1.000); 
+     -o-transition: $type $time cubic-bezier(0.000, 0.000, 0.355, 1.000); 
+        transition: $type $time cubic-bezier(0.000, 0.000, 0.355, 1.000); /* custom */
+
+-webkit-transition-timing-function: cubic-bezier(0.000, 0.000, 0.355, 1.000); 
+   -moz-transition-timing-function: cubic-bezier(0.000, 0.000, 0.355, 1.000); 
+     -o-transition-timing-function: cubic-bezier(0.000, 0.000, 0.355, 1.000); 
+        transition-timing-function: cubic-bezier(0.000, 0.000, 0.355, 1.000); /* custom */
 }
 
 @mixin transitionDelay($delayTime) {
@@ -21,26 +17,56 @@ html {
 	transition-delay: $delayTime;
 }
 
-@mixin animationEaseOutExpo() {
--webkit-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
-   -moz-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
-     -o-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
-        animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000); /* easeOutExpo */
-}
-
-@mixin animation($name, $time) {
-	-webkit-animation: $name $time;
-	-moz-animation: $name $time;
-	-o-animation: $name $time;
-	-ms-animation: $name $time;
-	animation: $name $time;
-}
-
 @mixin rotate($degrees) {
 	-webkit-transform: rotate($degrees);
 	-ms-transform: rotate($degrees);
 	-o-transform: rotate($degrees);
 	transform: rotate($degrees);
+}
+
+@mixin scale($scale) {
+	-webkit-transform: scale($scale);
+	-ms-transform: scale($scale);
+	-o-transform: scale($scale);
+	transform: scale($scale);
+}
+
+@mixin borderRadius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin animationEaseOutExpo() {
+  -webkit-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
+  -moz-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
+  -o-animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000);
+   animation-timing-function: cubic-bezier(0.190, 1.000, 0.9, 1.000); /* easeOutExpo */
+}
+
+@mixin animation($name, $time) {
+  -webkit-animation: $name $time;
+  -moz-animation: $name $time;
+  -o-animation: $name $time;
+  -ms-animation: $name $time;
+  animation: $name $time;
+}
+
+@mixin rotate($degrees) {
+  -webkit-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+
+$mobile: 767px;
+
+html,
+body {
+	height: 100%;
+	font-family: "Roboto", sans-serif;
 }
 
 .d-flex {
@@ -65,192 +91,163 @@ html {
   align-items: center;
 }
 
-$mobile: 767px;
-$tablet: 991px;
-
-body {
-	background-color: #f7f7f7;
-}
-
 .page-wrapper {
 	height: 100%;
-	display: table;
-
-	.page-inner {
-		display: table-cell;
-		vertical-align: middle;
-	}
+	background-color: #f2f2f2;
+	@extend .d-flex;
+	@extend .flex-centerY-centerX;
 }
 
 .el-wrapper {
-	width: 360px;
-	padding: 15px;
-	margin: 15px auto;
-	background-color: #fff;
-
-	@media (max-width: $tablet) {
-    width: 345px;
-  }
-
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+  -webkit-box-shadow: 2px 2px 15px #000;
+  box-shadow: 2px 2px 15px #000;
+  background: url("../images/bg.jpg") center no-repeat;
+  background-size: cover;
+  
   @media (max-width: $mobile) {
-    width: 290px;
-    margin: 30px auto;
+    background-position: center 100px;
+  }
+}
+
+.nav-list {
+  @include transitionEaseOut(all,0.4s);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 300; 
+  position: absolute;
+  right: 55px;
+  top: 53px;
+  opacity: 0;
+  padding-bottom: 6px;
+  padding-right: 55px;
+  overflow: hidden;
+
+  #magic-line {
+    height: 3px;
+    background: #040407;
+    position: absolute;
+    bottom: 0;
+    @include borderRadius(5px);
+    -webkit-transition: all 5ms;
+    -o-transition: all 5ms;
+    transition: all 5ms;
   }
 
-	&:hover {
-		.h-bg {
-			left: 0px;
-		}
+  .list-item {
+    float: left;
+    margin-right: 30px;
 
-		.price {
-			left: 20px;
-		 	-webkit-transform: translateY(-50%);
-			-ms-transform: translateY(-50%);
-			-o-transform: translateY(-50%);
-			transform: translateY(-50%);
-			color: #818181;
-		}
+    @media (max-width: $mobile) {
+      float: none;
+    }
 
-		.add-to-cart {
-			left: 50%;
-		}
+    &:last-of-type {
+      margin-right: 0;
+    }
 
-		.img {
-			webkit-filter: blur(7px);
-		    -o-filter: blur(7px);
-		    -ms-filter: blur(7px);
-		    filter: blur(7px);
-		    filter:progid:DXImageTransform.Microsoft.Blur(pixelradius='7', shadowopacity='0.0');
-		    opacity: 0.4;
-		}
-		
-		.info-inner {
-			bottom: 155px;
-		}
+    .list-link {
+      font-size: 22px;
+      color: #2e2e33;
 
-		.a-size {
-			@include transitionDelay(300ms);
-			bottom: 50px;
-			opacity: 1;
-		}
-	}
-
-	.box-down {
-		width: 100%;
-		height: 60px;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.box-up {
-		width: 100%;
-		height: 300px;
-		position: relative;
-		overflow: hidden;
-		text-align: center;
-	}
-
-	.img {
-		padding: 20px 0;
-		@include transitionEaseOut(all, 800ms);
-	}
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }
 
-.h-bg {
-	@include transitionEaseOut(all, 800ms);
-	width: 660px;
-	height: 100%;
-	background-color: #3f96cd;
-	position: absolute;
-	left: -659px;
 
-	.h-bg-inner {
-		width: 50%;
-		height: 100%;
-		background-color: #464646;
-	}
+.menu-wrapper {
+  &.opened {
+    .menu-btn {
+      @include transitionEaseOut(all, 0.5s);
+      width: 28px;
+      height: 16px;
+      
+      &:hover  {
+        -webkit-transform: rotate(90deg);
+           -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+             -o-transform: rotate(90deg);
+                transform: rotate(90deg);
+      } 
+    }
+
+    .nav-list {
+      right: 75px;
+      opacity: 1;
+    }
+  }
 }
 
-.info-inner {
-	@include transitionEaseOut(all, 400ms);
-	position: absolute;
-	width: 100%;
-	bottom: 25px;
-	.p-name,
-	.p-company {
-		display: block;
-	}
-
-	.p-name {
-		font-family: 'PT Sans', sans-serif;
-		font-size: 18px; 
-		color: #252525;
-	}
-
-	.p-company {
-		font-family: 'Lato', sans-serif;
-		font-size: 12px; 
-		text-transform: uppercase;
-		color: #8c8c8c;
-	}
-}
-
-.a-size {
-	@include transitionEaseOut(all, 300ms);
-	position: absolute;
-	width: 100%;
-	bottom: -20px;
-	font-family: 'PT Sans', sans-serif;
-	color: #828282;
-	opacity: 0;
-	.size {
-		color: #252525;
-	}
-}
-
-.cart {
-  display: block;
+.menu-btn {
+  width: 30px;
+  height: 18px;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
+  right: 60px;
+  top: 60px;
+  cursor: pointer; 
 
-	.price {
-		@include transitionEaseOut(all, 600ms);
-		@include transitionDelay(100ms);
-		display: block;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-	 	-webkit-transform: translate(-50%,-50%);
-		-ms-transform: translate(-50%,-50%);
-		-o-transform: translate(-50%,-50%);
-		transform: translate(-50%,-50%);
-		font-size: 16px;
-		color: #252525;
-	}
+  .menu-line {
+    width: 30px;
+    height: 3px;
+    background-color: #464646;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    &.middle-line {
+      top: 6px;
+    }
 
-	.add-to-cart {
-		@include transitionEaseOut(all, 600ms);
-		@include transitionDelay(100ms);
-		display: block;
-		position: absolute;
-		top: 50%;
-		left: 110%;
-	 	-webkit-transform: translate(-50%,-50%);
-		-ms-transform: translate(-50%,-50%);
-		-o-transform: translate(-50%,-50%);
-		transform: translate(-50%,-50%);
-		
-		.txt {
-			font-size: 12px;
-			color: #fff;
-			letter-spacing: 0.045em;
-			text-transform: uppercase;
-			white-space: nowrap;
-		}
-	}
+    &.bottom-line {
+      width: 22px;
+      top: 12px;
+    }
+  }
+}
+
+.fast-transition {
+  -webkit-transition: transform 5ms !important;
+  -o-transition: transform 5ms !important;
+  transition: transform 5ms !important;
+}
+
+  ////////////////////////////
+ /// keyframes animations ///
+////////////////////////////
+
+@keyframes btnTopLine {
+  0%   {width: 5px; height: 5px; right:5px; top:6px; background-color: #464646;}
+  25%  {width: 4px; height: 4px; right:9px; top:6px;background-color: #464646;}
+  50%  {width: 3px; height: 3px; right:13px; top:6px; background-color: #464646;}
+  75%  {width: 6px; height: 1px; right:13px; top:10px;}
+  94%  {width: 12px; height: 2px; right:10px; top:9px;}
+  100% {width: 21px; height: 3px; right:6px; top:9px;}
+}
+
+@keyframes btnMiddleLine {
+  0%   {width: 5px; height: 5px; right:14px; top:6px;}
+  25%  {width: 4px; height: 4px; right:14px; top:6px;}
+  50%  {width: 3px; height: 3px; right:14px; top:6px;}
+  60%  {width: 3px; height: 3px; right:14px; top:6px;}
+  70%  {width: 10px; height: 10px; right:11px; top:5px;}
+  80%  {width: 20px; height: 20px; right:6px; top:0;}
+  90%  {width: 30px; height: 30px; right:2px; top:-4px;}
+  100% {width: 40px; height: 40px; right:-4px; top:-10px;}
+}
+
+@keyframes btnBottomLine {
+  0%   {width: 5px; height: 5px; right:21px; top:6px; background-color: #464646;}
+  25%  {width: 4px; height: 4px; right:17px; top:6px; background-color: #464646;}
+  50%  {width: 3px; height: 3px; right:13px; top:6px; background-color: #464646;}
+  75%  {width: 6px; height: 1px; right:13px; top:10px;}
+  94%  {width: 12px; height: 2px; right:10px; top:9px;}
+  100% {width: 21px; height: 3px; right:6px; top:9px;}
 }

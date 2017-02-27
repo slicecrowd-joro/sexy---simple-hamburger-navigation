@@ -6,44 +6,53 @@ $(document).ready(function () {
 			middleLine = $('.middle-line'),
 			bottomLine = $('.bottom-line'),
 			menuLine = $('.menu-line'),
-			checking = false,
-			animating = false,
-			speed15ms = 0.15,
-			speed20ms = 0.2,
-			menuWrapper = $('.menu-wrapper'),
+			test = false,
+			animating = false;
+
+
+	var menuWrapper = $('.menu-wrapper'),
 			navList = $('.nav-list');
 
+	$(document).click(function (e) {
+    //check if the clicked area is .menu-wrapper or not
+    if (menuWrapper.hasClass('opened') && !animating) {
+    	menuWrapper.removeClass('opened');
+			tlClick.pause();
+			tlClickClose.play(0);
+		}
+	});
+
 	tlMouseEnter
-		.to(menuLine, speed15ms, {
+		.to(menuLine, 0.15, {
 			width: '6px',
 			height: '6px',
 			borderRadius: '50%',
 			ease: Sine.easeInOut
 		})
-		.to(topLine, speed15ms, {
+		.to(topLine, 0.15, {
 			x: 24,
 			y: 6
-		}, '-=' + speed15ms)
-		.to(middleLine, speed15ms, {
+		}, '-=0.15')
+		.to(middleLine, 0.15, {
 			x: 12,
 			y: 0
-		}, '-=' + speed15ms)
-		.to(bottomLine, speed15ms, {
+		}, '-=0.15')
+		.to(bottomLine, 0.15, {
 			x: 0,
 			y: -6
-		}, '-=' + speed15ms);
+		}, '-=0.15');
 
 	tlClick
-		.to(topLine, speed20ms, {
+		.to(topLine, 0.2, {
 			x: 12,
 			onStart: function() {
-				checking = true,
+				test = true,
 				animating = true;
 			}
 		})
-		.to(bottomLine, speed20ms, {
+		.to(bottomLine, 0.2, {
 			x: 12
-		}, '-=' + speed20ms)
+		}, '-=0.2')
 		.to(middleLine, 0.1, {
 			x: -6, 
 			y: -18, 
@@ -52,7 +61,7 @@ $(document).ready(function () {
 			borderRadius: '50%',
 			ease: Sine.easeInOut
 		}, '+=0.10')
-		.to(topLine, speed20ms, {
+		.to(topLine, 0.2, {
 			width: 20,
 			height: 3,
 			x: 4,
@@ -63,7 +72,7 @@ $(document).ready(function () {
 			backgroundColor: '#fff',
 			ease: Sine.easeInOut
 		}, '-=0.16')
-		.to(bottomLine, speed20ms, {
+		.to(bottomLine, 0.2, {
 			width: 20,
 			height: 3,
 			x: 4,
@@ -76,10 +85,10 @@ $(document).ready(function () {
 			onComplete: function() {
 				animating = false;
 			}
-		}, '-=' + speed20ms);
+		}, '-=0.2');
 
 	tlClickClose
-		.to(topLine, speed20ms, {
+		.to(topLine, 0.2, {
 			width: 0,
 			x: 13,
 			rotation: 0,
@@ -87,12 +96,12 @@ $(document).ready(function () {
 				animating = true;
 			}
 		})
-		.to(bottomLine, speed20ms, {
+		.to(bottomLine, 0.2, {
 			width: 0,
 			x: 13,
 			rotation: 0
-		}, '-=' + speed20ms)
-		.to(middleLine, speed20ms, {
+		}, '-=0.2')
+		.to(middleLine, 0.2, {
 			width: 32,
 			height: 3,
 			x: 0,
@@ -100,33 +109,24 @@ $(document).ready(function () {
 			borderRadius: 0,
 			ease: Sine.easeInOut
 		}, '-=0.05')
-		.to(topLine, speed20ms, {
+		.to(topLine, 0.2, {
 			width: 32,
 			x: 0,
 			y: 0,
 			backgroundColor: '#464646',
 			ease: Sine.easeInOut
 		}, '-=0.1')
-		.to(bottomLine, speed20ms, {
+		.to(bottomLine, 0.2, {
 			width: 22,
 			x: 0,
 			y: 0,
 			backgroundColor: '#464646',
 			ease: Sine.easeInOut,
 			onComplete: function() {
-				checking = true,
+				test = true,
 				animating = false;
 			}
-		}, '-=' + speed20ms);
-
-	$(document).click(function (e) {
-    //check if the clicked area is .menu-wrapper or not
-    if (menuWrapper.hasClass('opened') && !animating) {
-    	menuWrapper.removeClass('opened');
-			tlClick.pause();
-			tlClickClose.play(0);
-		}
-	});
+		}, '-=0.2');
 
 	$('.menu-btn').hover(function() {
 		/* Stuff to do when the mouse enters the element */
@@ -134,15 +134,15 @@ $(document).ready(function () {
 			tlMouseEnter.play(0);
 		}
 		if (!animating) {
-			checking = false;
+			test = false;
 		}
 	}, function() {
 		/* Stuff to do when the mouse leaves the element */
-		if (!menuWrapper.hasClass('opened') && !checking && !animating) {
+		if (!menuWrapper.hasClass('opened') && !test && !animating) {
 			tlMouseEnter.reverse();
 		}
 		if (!animating) {
-			checking = false;
+			test = false;
 		}
 	});
 
