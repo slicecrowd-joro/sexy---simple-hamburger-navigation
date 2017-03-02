@@ -168,8 +168,6 @@ $(document).ready(function () {
 	}
 
 	/* Add Magic Line markup via JavaScript, because it ain't gonna work without */
-	navList.append("<span id='magic-line'></span>");
-		    
   /* Cache it */
   var _magicLine = $("#magic-line");
   
