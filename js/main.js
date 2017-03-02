@@ -168,30 +168,29 @@ $(document).ready(function () {
 	}
 
 	/* Add Magic Line markup via JavaScript, because it ain't gonna work without */
-  navList.append("<span id='magic-line'></span>");
-    
+	navList.append("<span id='magic-line'></span>");
+		    
   /* Cache it */
-  var $magicLine = $("#magic-line");
+  var _magicLine = $("#magic-line");
   
-  $magicLine
-    .width('180px')
-    .css("right", '-180px')
-    .data("origLeft", $magicLine.position().left)
-    .data("origWidth", $magicLine.width());
+  _magicLine
+    // .css("right", '-180px')
+    .attr("data-origLeft", "100%")
+    .attr("data-origWidth", '180px');
       
   navList.find(".list-item a").hover(function() {
-    $el = $(this);
+    var $el = $(this);
     leftPos = $el.position().left;
     newWidth = $el.parent().width();
       
-    $magicLine.stop().animate({
-      left: leftPos + newWidth/2-19,
-      width: '38px'
+    _magicLine.stop().css({
+    	left: leftPos + newWidth/2-19,
+    	width: 38
     });
   }, function() {
-    $magicLine.stop().animate({
-      left: $magicLine.data("origLeft"),
-      width: $magicLine.data("origWidth")
-    });    
+    _magicLine.stop().css({
+    	left: _magicLine.attr("data-origLeft"),
+    	width: _magicLine.attr("data-origWidth")
+    });
   });
 });
